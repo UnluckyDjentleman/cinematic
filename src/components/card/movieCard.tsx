@@ -26,19 +26,19 @@ export default function MovieCard({
 
   const [opened, { open, close }] = useDisclosure(false);
   const { isRated, setIsRated } = useIsRated(user as User, movieInfo);
-  const [ratingValue, setRatingValue] = useState<number | undefined>(
-    isRated?.rating
+  const [ratingValue, setRatingValue] = useState<number | null>(
+    isRated?.rating as number
   );
   const onSetRatingValue = useCallback(
-    (rating: number | undefined) => {
+    (rating: number | null) => {
       setRatingValue(rating);
       setIsRated(
-        rating !== undefined
+        rating !== null
           ? {
               isRated: true,
               rating: rating,
             }
-          : { isRated: false, rating: undefined }
+          : { isRated: false, rating: null }
       );
     },
     [ratingValue]

@@ -24,8 +24,8 @@ export default function FilmPage() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const [ratingValue, setRatingValue] = useState<number | undefined>(
-    isMovieRated.isRated?.rating
+  const [ratingValue, setRatingValue] = useState<number | null>(
+    isMovieRated.isRated?.rating as number
   );
 
   console.log(isMovieRated.isRated?.rating);

@@ -14,7 +14,7 @@ export default function ModalRate({
 }: {
   opened: boolean;
   close: () => void;
-  onChangeRating: (value: number | undefined) => void;
+  onChangeRating: (value: number | null) => void;
 }) {
   const user = useAppSelector((state) => state.user.user);
 
@@ -29,8 +29,8 @@ export default function ModalRate({
 
   console.log(ratedMovie);
 
-  const [rating, setRating] = useState<number | undefined>(
-    ratedMovie.isRated?.rating
+  const [rating, setRating] = useState<number | null>(
+    ratedMovie.isRated?.rating as number
   );
 
   const setRatingValue = useCallback(
@@ -42,11 +42,11 @@ export default function ModalRate({
   );
 
   const onChangeRatingValue = useCallback(
-    async (rating: number | undefined) => {
+    async (rating: number | null) => {
       setRating(rating);
       onChangeRating(rating);
       if (rating !== undefined) {
-        await addMovieRating(user as User, movieId.id, rating);
+        await addMovieRating(user as User, movieId.id, rating as number);
       } else {
         await deleteMovie(user as User, movieId.id);
       }
@@ -60,8 +60,8 @@ export default function ModalRate({
       <Modal opened={opened} onClose={close} title="Rating">
         <Flex direction="column">
           <Rating
-            value={rating}
-            defaultValue={ratedMovie.isRated?.rating}
+            value={rating as number}
+            defaultValue={ratedMovie.isRated?.rating as number}
             fractions={2}
             count={10}
             onChange={setRatingValue}
@@ -80,7 +80,7 @@ export default function ModalRate({
               radius={8}
               variant="transparent"
               color="#9854F6"
-              onClick={() => onChangeRatingValue(undefined)}
+              onClick={() => onChangeRatingValue(null)}
             >
               Remove rating
             </Button>
