@@ -1,17 +1,17 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: {id: number|undefined}={id: undefined}
+const initialState: { id: number | undefined } = { id: undefined };
 
-export const idReducer=createSlice({
-    name: 'id',
-    initialState,
-    reducers:{
-        setId: (state, action: PayloadAction<number|undefined>)=>{
-            state.id=action.payload
-        }
-    }
-})
+export const idReducer = createSlice({
+  name: "id",
+  initialState,
+  reducers: {
+    setId: (state, action: PayloadAction<number | undefined>) => {
+      state.id = action.payload;
+    },
+  },
+});
 
-export const {setId} = idReducer.actions
+export const { setId } = idReducer.actions;
 
-export default idReducer.reducer; 
+export default idReducer.reducer;
